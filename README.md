@@ -14,6 +14,9 @@ I personally use StoreDown every day to keep track of 1,359 items <sup> at time 
 
 
 ## [Demo/Application](https://foxusa.github.io/StoreDown/dist/)
+Click `RUN IN LOCAL MODE` in the bottom left to quickly demo/test.
+[Here is some test data you can import](https://gist.github.com/FoxUSA/80bc1b72b896a5d1db550ea7aaf4a167)
+
 > If you use this you should probably take regular backups exports of your data.
 
 > If you want to sync between multiple devices, you need to setup a CouchDB server.
