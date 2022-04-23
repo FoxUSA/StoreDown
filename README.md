@@ -13,7 +13,7 @@ Due to the way StoreDown was built it can also be a forms application fronting C
 I personally use StoreDown every day to keep track of 1,359 items <sup> at time of writing</sup>. Those items range from: a 90 pack of dental floss picks, a Jig saw, a refrigerator, to red 15W USB A to USB C cable(of which I have 6). If having this capability appeals to you come along and enjoy the fun!
 
 
-## [Demo/Application](#TODO)
+## [Demo/Application](https://foxusa.github.io/StoreDown/dist/)
 > If you use this you should probably take regular backups exports of your data.
 
 > If you want to sync between multiple devices, you need to setup a CouchDB server.
