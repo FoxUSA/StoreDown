@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"> <!-- TODO download these -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons"> <!-- TODO download these -->
+
+    <!-- Disable pinch to zoom-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+
+    <title>StoreDown</title>
+    <style>
+      body {
+        background-color: rgb(48, 48, 48); /*Prevents a white blink*/
+      }
+      @keyframes colorchange {
+          from{
+            background-color:none;
+            opacity: 0;
+          }
+          to{
+            background-color: rgb(48, 48, 48);
+            opacity: 1;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but StoreDown doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
