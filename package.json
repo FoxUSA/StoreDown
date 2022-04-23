@@ -1,7 +1,6 @@
 {
   "name": "storedown",
-  "version": "21.03.00",
-  "private": true,
+  "version": "22.04.00",
   "scripts": {
     "serve": "vue-cli-service serve",
     "serve:prod": "vue-cli-service serve --mode production --https",
