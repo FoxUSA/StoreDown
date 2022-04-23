@@ -85,7 +85,7 @@
     </v-list>
 
     <v-subheader class="caption mt-3 grey--text text--darken-2 fade-out-legal">
-      &#169; 2021 Jacob Liscom <br /> Version: {{version}}
+      &#169; 2022 Jacob Liscom <br /> Version: {{version}}
     </v-subheader>
   </v-navigation-drawer>
 
