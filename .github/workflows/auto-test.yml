@@ -1,4 +1,4 @@
-name: 
+name: Auto Test
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         cache: 'npm'
 
     - name: Install StoreDown dependencies
-      run: npm run install
+      run: npm install
 
     - name: Build StoreDown artifacts
       run: npm run build
