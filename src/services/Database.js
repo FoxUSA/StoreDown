@@ -1,7 +1,50 @@
 import { ConfigService } from '../services/Config.js'
-import Database from '../../../storedown-common/Database.js'
 import PouchDB from 'pouchdb-browser'
 import Vue from 'vue'
+
+let Database = class {
+  /**
+   * Minimal PouchDB harness. For use in browser and cli
+   * @param {[type]} databaseConfig       - config object. Containers url, syncOptions, and syncCallback
+   * @param {[type]} PouchDB              [description]
+   * @param {String} [dbPath='StoreDown'] [description]
+   */
+  constructor (databaseConfig, PouchDB, dbPath = 'StoreDown') { // Dependency injector pattern
+    // Create or find database
+    this.localDatabase = new PouchDB(dbPath)
+
+    // Re-init sync
+    if (databaseConfig && databaseConfig.url) {
+      this.remoteDatabase = new PouchDB(databaseConfig.url)
+      databaseConfig.syncCallback(this.localDatabase.sync(this.remoteDatabase, databaseConfig.syncOptions))
+    }
+  }
+
+  /**
+   * Get database object for crud operations. Doesn't really make sense to abstract out interface.
+   * @return {PouchDB} - PouchDB local database object
+   */
+  getDatabase () {
+    return this.localDatabase
+  }
+
+  /**
+   * [getAllItems description]
+   * @return {promise} - when it resolves return array of item.doc's
+   */
+  getAllItems (options = {}) {
+    return new Promise((resolve, reject) => {
+      let returnItems = []
+      this.localDatabase.allDocs(Object.assign(options, { // Merge options
+        include_docs: true
+      })).then((data) => {
+        data.rows = data.rows.filter(row => row.doc.type === 'item').forEach(item => returnItems.push(item.doc))
+        data.rows = returnItems
+        return resolve(data)
+      }).catch(reject)
+    })
+  }
+}
 
 let database = null
 let replicationTimeout = null
