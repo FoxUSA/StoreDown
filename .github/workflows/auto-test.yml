@@ -32,5 +32,8 @@ jobs:
     - name: Run lint test
       run: npm run lint
 
-    - name: Run test suite
-      run: npm test
+    - name: Run Unit Tests
+      run: npm run test:unit
+
+    - name: Run e2e Tests
+      run: npm run test:e2e
