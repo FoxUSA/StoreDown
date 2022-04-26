@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 
 # Install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 # Build dist
 COPY . .
