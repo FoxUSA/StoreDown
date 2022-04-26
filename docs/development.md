@@ -38,3 +38,15 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Build the Docker container
+```
+docker build -t foxusa/storedown:$tag .
+# On M1 Macs
+docker build --platform linux/amd64 -t foxusa/storedown:latest -t foxusa/storedown:$version .
+```
+
+### Push container
+```
+docker push --all-tags foxusa/storedown
+```
