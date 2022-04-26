@@ -1,0 +1,8 @@
+# You can change your port or volume location
+services:
+  storedown:
+    image: foxusa/storedown:latest
+    container_name: storedown
+    ports:
+      - 80:80
+    restart: unless-stopped

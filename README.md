@@ -34,7 +34,13 @@ Click `RUN IN LOCAL MODE` in the bottom left to quickly demo/test.
 - Data Import(JSON, and YML)
 - TODO markdown
 
+## How to run
 
+### Docker
+
+```bash
+docker run -d --restart=unless-stopped -p 80:80 foxusa/storedown:latest
+```
 
 ## Quick Links
 - [How to install](./docs/install.md)
