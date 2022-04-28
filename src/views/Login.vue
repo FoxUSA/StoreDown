@@ -57,9 +57,6 @@ import DatabaseService from '../services/Database.js'
 
 const DEFAULT_CONFIG = `
 ---
-# theme: #TODO
-# hooks: #TODO
-# savedSerches: #TODO
 dataDefinition:
   - displayName: Core info
     color: light-blue darken-2 #pick colors from https://v15.vuetifyjs.com/en/framework/colors
@@ -192,7 +189,7 @@ export default {
     progressModal: false
   }),
   watch: {
-    'database.remember' (to, from) { // Make sure we stop skpping when the modal closes
+    'database.remember' (to, from) { // Make sure we stop skipping when the modal closes
       if (!to) {
         this.user.remember = false
       }
@@ -206,8 +203,17 @@ export default {
 
       this.progressModal = true
       DatabaseService(true, () => { // Force DB service recreation.
-        this.progressModal = false
-        this.submit()
+        ConfigService.getConfig().then((config) => {
+          console.log(config)
+          this.submit()
+        }).catch((error) => { // Make sure we have a config
+          if (error.message !== 'missing') { throw error }
+
+          ConfigService.setConfig({ yml: DEFAULT_CONFIG }).then((data) => {
+            this.$toasted.info('Default config used')
+            this.submit()
+          })
+        })
       })
     },
     skip: function () {
@@ -219,6 +225,8 @@ export default {
       this.submit()
     },
     submit: function () {
+      this.progressModal = false // Always turn off the progress bar
+
       if (this.$router.currentRoute.path === '/login/' || this.$router.currentRoute.path === '/login') {
         this.$router.push('/')
       }
