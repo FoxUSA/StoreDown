@@ -30,7 +30,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn depressed small @click.stop="skip" color="">Run in local mode</v-btn>
+          <v-btn depressed small @click.stop="skip" color="">Run in local/demo mode</v-btn>
           <v-spacer></v-spacer>
           <v-btn depressed @click.stop="login" color="primary">Login</v-btn>
         </v-card-actions>
