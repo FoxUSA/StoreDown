@@ -86,4 +86,4 @@ Go and pick it up.
 - I use the [Scanner Keyboard](https://play.google.com/store/apps/details?id=com.tecit.android.barcodekbd.demo&hl=en_US&gl=US) on Android to scan barcodes.
 - On the desktop side, they sell [bluetooth scanners](https://smile.amazon.com/gp/product/B08GWSL4Y5) that act as keyboards and will try in a barcode.
 - I have experimented with [NFC readers](https://smile.amazon.com/gp/product/B019JM9R12) and [tags](https://smile.amazon.com/gp/product/B08F1Y8X3F). 
-  The problem is everything already has a barcode or its cheaper to [print an asset tag](https://smile.amazon.com/gp/product/B0146SDE0Y) or use a labeler.
+  The problem is everything already has a barcode, its cheaper to [print an asset tag](https://smile.amazon.com/gp/product/B0146SDE0Y), or use a labeler.

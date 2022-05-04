@@ -39,7 +39,7 @@
                     <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='string'" v-model="item[field.name]" :label="field.displayName" :disabled="field.disabled"></v-text-field>
 
                     <!-- path -->
-                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='path'" v-model="item[field.name]" :label="field.displayName" :prefix="field.prefixes[item[field.name]]" :disabled="field.disabled"></v-text-field>
+                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='path'" v-model="item[field.name]" :label="field.displayName" :prefix="field.prefixes[(item[field.name]|| '').toLowerCase()]" :disabled="field.disabled"></v-text-field>
 
                     <!-- lastDate or last modified-->
                     <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='lastDate' || field.type=='lastModified' " v-model="item[field.name]" :label="field.displayName" :disabled="true"></v-text-field>
@@ -168,7 +168,7 @@ export default {
      * Duplicate and existing item
      */
     duplicate () {
-      this.item._id = null // Removing _id and _rev and saving is equivilent to creating a copy. A new item will be created and the existing item with remain
+      this.item._id = null // Removing _id and _rev and saving is equivalent to creating a copy. A new item will be created and the existing item with remain
       this.item._rev = null
     },
     /**
@@ -216,7 +216,7 @@ export default {
         }
       }))
 
-      // Buisness end of saving
+      // Business end of saving
       let callback = (response, error) => {
         if (error || !response.ok) {
           return this.$toasted.error(`Received save error ${error}`)
