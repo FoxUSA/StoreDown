@@ -42,6 +42,9 @@ Click `RUN IN LOCAL MODE` in the bottom left to quickly demo/test.
 - [Config/Custom field customization](./docs/config.schema.md)
 - [How I use StoreDown](./docs/system.md)
 - [Sub Reddit](https://www.reddit.com/r/storedown/)
+- [Like us on Alternative To][alternativeto]
+
+
 
 ---
 
@@ -73,4 +76,6 @@ Labeling items allows some unforeseen benefits like:
 > I don't like xyz about StoreDown, do you know of any alternatives? 
 
 I would really like to be friends with the folks in orbit around [InvenTree](https://github.com/inventree/InvenTree) and [Grocy](https://github.com/grocy/grocy). 
-So go check those out.
+So go check those out. More alternatives on [Alternative To][alternativeto].
+
+[alternativeto]: https://alternativeto.net/software/storedown/
