@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.5d060663b0ec5972064c5e5df7abab20.js"
+  "precache-manifest.93194700c78fdd1ea6f04ef74fb16135.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "storedown"});
