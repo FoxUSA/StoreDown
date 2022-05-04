@@ -164,7 +164,7 @@ export default {
                 i += data.rows.length || 10// If no items are returned the database only has config. We need to add some manually so we dont loop forever
 
                 data.rows.forEach((item) => {
-                  let prefix = this.pathField.prefixes[item[this.pathField.name]]
+                  let prefix = this.pathField.prefixes[(item[this.pathField.name] || '').toLowerCase()]
                   if (!prefix) {
                     prefix = '' // Blanks it out instead of printing undefined.
                   }

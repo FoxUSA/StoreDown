@@ -11,7 +11,7 @@
       </template> <!-- Render only last 6 characters of id -->
 
       <template v-else-if="header.item.type=='path'">
-        {{header.item.prefixes[props.item[header.value]]}}{{props.item[header.value]}}
+        {{header.item.prefixes[(props.item[header.value] || '').toLowerCase()]}}{{props.item[header.value].toLowerCase()}}
       </template>
 
       <template v-else-if="header.item.type=='list'">
