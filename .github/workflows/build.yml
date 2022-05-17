@@ -35,4 +35,22 @@ jobs:
     - name: Build StoreDown artifacts
       run: npm run build
 
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: |
+          dist
+          !dist/*.zip
+
+    - name: Build StoreDown ZIP
+      run: npm run dist
+
+    - name: Archive zip artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: |
+          dist/*.zip
+
 

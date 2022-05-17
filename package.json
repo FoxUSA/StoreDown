@@ -1,6 +1,6 @@
 {
   "name": "storedown",
-  "version": "22.04.01",
+  "version": "22.04.02",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -8,7 +8,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "serve:build": "vue-cli-service build && serve -s dist",
-    "serve:prod": "vue-cli-service serve --mode production --https"
+    "serve:prod": "vue-cli-service serve --mode production --https",
+    "dist": "cd dist && zip -r v${npm_package_version}.zip ."
   },
   "dependencies": {
     "file-saver": "^2.0.2",
