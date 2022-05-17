@@ -97,7 +97,7 @@ Cypress.Commands.add('loadTestData', () => {
   cy.visit('/#/import-export')
 
   cy.get('textarea').invoke('val', testData).trigger('input')
-  cy.contains('Import YML').click()
+  cy.contains('Import YML').click().wait(500) //Let the ui process the data
 })
 
 //
