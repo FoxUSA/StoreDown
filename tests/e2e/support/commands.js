@@ -17,7 +17,7 @@ Cypress.Commands.add('localMode', () => {
 
   cy.visit('/#/login/')
   cy.contains('Run in local/demo mode').click()
-  cy.hash().should('eq', '#/')//Give the DB a moment after we click into local mode to redirect us. Or we could have used a time wait
+  cy.hash().should('eq', '#/')// Give the DB a moment after we click into local mode to redirect us. Or we could have used a time wait
 })
 
 Cypress.Commands.add('loadTestData', () => {
