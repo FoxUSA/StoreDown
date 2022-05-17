@@ -1,7 +1,6 @@
 name: Auto Test
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -11,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [14.x, 16.x]
+        node-version: [ 17.x]
 
     steps:
     - run: git config --global core.autocrlf false
