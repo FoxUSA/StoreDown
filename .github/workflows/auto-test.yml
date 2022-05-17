@@ -26,8 +26,13 @@ jobs:
     - name: Install StoreDown dependencies
       run: npm ci
 
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run e2e tests
+      run: npx vue-cli-service test:e2e --headless
+
     - name: Build StoreDown artifacts
       run: npm run build
 
-    - name: Run lint test
-      run: npm run lint
+

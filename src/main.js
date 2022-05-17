@@ -13,4 +13,4 @@ new Vue({
 }).$mount('#app')
 
 // Require login
-router.beforeEach()
+// router.beforeEach()

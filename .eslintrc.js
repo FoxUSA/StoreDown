@@ -10,9 +10,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-return-assign': 'off'
+    'no-return-assign': 'off',
+    'vue/multi-word-component-names': 'off'
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    'ecmaVersion': 2020
   }
 }
