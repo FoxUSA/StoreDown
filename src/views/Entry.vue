@@ -35,6 +35,9 @@
                 <v-layout wrap>
                   <v-flex :class="field.size ? `xs${field.size}` : 'xs12 sm6 xl4'" v-for="field in group.fields" :key="field.name">
 
+                    <!-- Special ID field to give a different disabled property and maybe show shortened form  -->
+                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='uuid_string'" v-model="item[field.name]" :label="field.displayName" :disabled="mostlyDisabled"></v-text-field>
+
                     <!-- String  -->
                     <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='string'" v-model="item[field.name]" :label="field.displayName" :disabled="field.disabled"></v-text-field>
 
@@ -144,6 +147,12 @@ export default {
         return
       }
       return this.config.dataDefinition
+    },
+    mostlyDisabled: function () {
+      if (!this.$route.params.id) {
+        return false
+      }
+      return true
     }
   },
   mounted () {
