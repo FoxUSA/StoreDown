@@ -10,6 +10,7 @@ describe('List View', () => {
   })
 
   it('handles a blank location save', () => {
+    //https://github.com/FoxUSA/StoreDown/issues/10 - There was an issue where if you saved an item with no location it would crash the list views
     cy.visit('/#/entry')// Go to the entry page
     cy.get('[aria-label="Name"]').type('Blank Location')
     cy.contains('Save').click()
