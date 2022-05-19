@@ -31,7 +31,7 @@ jobs:
         run: jq -r .version ./package.json
       #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
       - name: Get version 
-        run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV 
+        run: echo "RELEASE_VERSION=${jq -r .version ./package.json}" >> $GITHUB_ENV 
       - name: Test
         run: |
           echo $RELEASE_VERSION
