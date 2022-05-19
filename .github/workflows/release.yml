@@ -25,10 +25,6 @@ jobs:
           path: ./
       - name: Install jq
         run: sudo apt-get install -y jq
-      - name: TODO
-        run: ls -lt . 
-      - name: TODO2
-        run: jq -r .version ./package.json
       #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
       - name: Get version 
         run: echo "RELEASE_VERSION=$(jq -r .version ./package.json)" >> $GITHUB_ENV 
@@ -51,5 +47,16 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: foxusa/storedown:todolatest,foxusa/storedown:todo${{ env.RELEASE_VERSION }}
+          tags: foxusa/storedown:todolatest,foxusa/storedown:todo${{ env.RELEASE_VERSION }} 
+
+      - name: Zip up release
+        run: cd dist && zip -r v${{ env.RELEASE_VERSION }}.zip .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: StoreDown v${{ env.RELEASE_VERSION }}
+          tag_name: v${{ env.RELEASE_VERSION }}
+          files: |
+            dist/v${{ env.RELEASE_VERSION }}.zip
     
