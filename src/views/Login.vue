@@ -204,7 +204,6 @@ export default {
       this.progressModal = true
       DatabaseService(true, () => { // Force DB service recreation.
         ConfigService.getConfig().then((config) => {
-          console.log(config)
           this.submit()
         }).catch((error) => { // Make sure we have a config
           if (error.message !== 'missing') { throw error }

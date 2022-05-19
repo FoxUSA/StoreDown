@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Retrieve build
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: ./dist
+      - name: Retrieve release files
+        uses: actions/download-artifact@v3
+        with:
+          name: release
+          path: ./
+      - name: Install jq
+        run: sudo apt-get install -y jq
+      #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
+      - name: Get version 
+        run: echo "RELEASE_VERSION=$(jq -r .version ./package.json)" >> $GITHUB_ENV 
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          ls -lt dist
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: foxusa/storedown:latest,foxusa/storedown:${{ env.RELEASE_VERSION }} 
+
+      - name: Zip up release
+        run: cd dist && zip -r v${{ env.RELEASE_VERSION }}.zip .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: StoreDown v${{ env.RELEASE_VERSION }}
+          tag_name: v${{ env.RELEASE_VERSION }}
+          files: |
+            dist/v${{ env.RELEASE_VERSION }}.zip
+    
