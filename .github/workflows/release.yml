@@ -6,11 +6,10 @@ on:
       - working # TODO
 
 jobs:
-  Build:
-    runs-on: ubuntu-latest
-      uses: ./.github/workflows/build.yml
+  build:
+    uses: ./.github/workflows/build.yml
 
-  Release:
+  release:
     runs-on: ubuntu-latest
     steps:
       #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
