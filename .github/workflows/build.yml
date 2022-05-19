@@ -2,9 +2,7 @@ name: Build
 
 on:
   #pull_request:
-  push:
-    branches:
-      - working # TODO
+  workflow_call:
 
 jobs:
   build:
@@ -60,18 +58,14 @@ jobs:
         name: dist
         path: dist
 
-  release:
-    if: github.ref == 'refs/heads/working' #TODO
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Install jq
-        run: sudo apt-get install -y jq
-      #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
-      - name: Set env 
-        run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV 
-      - name: Test
-        run: |
-          echo $RELEASE_VERSION
-          ls -lt dist
+    - name: Upload workspace
+      if: github.ref == 'refs/heads/working' #If we are are on master we are running a deploy so save the workspace #TODO
+      uses: actions/upload-artifact@v3
+      with:
+        name: workspace
+        path: .
+
+
+        
+
 
