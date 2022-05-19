@@ -14,13 +14,12 @@ jobs:
 
   Release:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Set env
-        run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
-    - name: Test
-      run: |
-        echo $RELEASE_VERSION
-        ls -lt dist
+      - name: Set env #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
+          run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV 
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          ls -lt dist
 
 
