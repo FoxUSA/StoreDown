@@ -51,7 +51,7 @@ jobs:
         path: |
           tests/e2e/videos
 
-    - name: Build StoreDown artifacts
+    - name: Build StoreDown
       run: npm run build
 
     - name: Build artifact
@@ -60,14 +60,8 @@ jobs:
         name: dist
         path: dist
 
-    - name: Version artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: package.json
-        path: package.json
-
   release:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/working' #TODO
     runs-on: ubuntu-latest
     needs: build
     steps:
