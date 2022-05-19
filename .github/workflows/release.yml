@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - working # TODO
+      - master
 
 jobs:
   build:
@@ -47,7 +47,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: foxusa/storedown:todolatest,foxusa/storedown:todo${{ env.RELEASE_VERSION }} 
+          tags: foxusa/storedown:latest,foxusa/storedown:${{ env.RELEASE_VERSION }} 
 
       - name: Zip up release
         run: cd dist && zip -r v${{ env.RELEASE_VERSION }}.zip .
