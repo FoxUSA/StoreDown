@@ -8,8 +8,7 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: ./build.yml
+      uses: ./.github/workflows/build.yml
 
   Release:
     runs-on: ubuntu-latest
