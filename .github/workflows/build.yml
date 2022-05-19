@@ -1,10 +1,11 @@
-name: Auto Test
+name: Build
 
 on:
   pull_request:
+  workflow_call:
 
 jobs:
-  auto-test:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
