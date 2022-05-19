@@ -6,8 +6,8 @@ on:
       - working # TODO
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
+  # build:
+  #   uses: ./.github/workflows/build.yml
 
   release:
     runs-on: ubuntu-latest
@@ -23,10 +23,12 @@ jobs:
         with:
           name: release
           path: ./
-      - name: TODO
-        run: ls -lt . 
       - name: Install jq
         run: sudo apt-get install -y jq
+      - name: TODO
+        run: ls -lt . 
+      - name: TODO2
+        run: jq -r .version .package.json
       #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
       - name: Get version 
         run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV 
