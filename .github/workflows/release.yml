@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - working # TODO
+
+jobs:
+  Build:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/build
+
+  Release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set env
+        run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
+    - name: Test
+      run: |
+        echo $RELEASE_VERSION
+        ls -lt dist
+
+
