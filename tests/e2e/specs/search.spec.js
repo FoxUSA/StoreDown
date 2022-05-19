@@ -10,11 +10,11 @@ describe('List View', () => {
     cy.contains('USB A to USB C cable')
 
     //Partial uuid
-    cy.get('input[placeholder="Search items"').clear().type('1a76be8{enter}')
+    cy.get('input[placeholder="Search items"').focus().clear().type('1a76be8{enter}')
     cy.contains('Dental floss pick')
 
     //Click search with name
-    cy.get('input[placeholder="Search items"').clear().type('USB A to USB C cable')
+    cy.get('input[placeholder="Search items"').focus().clear().type('USB A to USB C cable')
     cy.get('.v-btn__content').contains('Search').click()
     cy.contains('8ed48e')
   })
