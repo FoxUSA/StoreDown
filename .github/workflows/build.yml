@@ -28,26 +28,29 @@ jobs:
 
     - name: Run linter
       run: npm run lint
+      
+    - name: Cypress run
+      uses: cypress-io/github-action@v2
 
-    - name: Run e2e tests
-      id: tests
-      run: npx vue-cli-service test:e2e --headless
+    # - name: Run e2e tests
+    #   id: tests
+    #   run: npx vue-cli-service test:e2e --headless
 
-    - name: Get test screenshots
-      if: failure() && steps.tests.outcome == 'failure'
-      uses: actions/upload-artifact@v3
-      with:
-        name: testScreenshots
-        path: |
-          tests/e2e/screenshots
+    # - name: Get test screenshots
+    #   if: failure() && steps.tests.outcome == 'failure'
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: testScreenshots
+    #     path: |
+    #       tests/e2e/screenshots
 
-    - name: Get test videos
-      if: failure() && steps.tests.outcome == 'failure'
-      uses: actions/upload-artifact@v3
-      with:
-        name: testVideo
-        path: |
-          tests/e2e/videos
+    # - name: Get test videos
+    #   if: failure() && steps.tests.outcome == 'failure'
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: testVideo
+    #     path: |
+    #       tests/e2e/videos
 
     - name: Build StoreDown
       run: npm run build
