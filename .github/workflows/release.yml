@@ -13,15 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Retrieve working
-        uses: actions/download-artifact@v2
+      - name: Retrieve build
+        uses: actions/download-artifact@v3
         with:
-          name: working
+          name: dist
+          path: ./dist
+      - name: Retrieve release files
+        uses: actions/download-artifact@v3
+        with:
+          name: release
           path: .
+      - name: TODO
+        run: ls -lt . 
       - name: Install jq
         run: sudo apt-get install -y jq
       #Based on https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
-      - name: Set env 
+      - name: Get version 
         run: echo "RELEASE_VERSION=${jq -r .version package.json}" >> $GITHUB_ENV 
       - name: Test
         run: |

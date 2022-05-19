@@ -58,12 +58,13 @@ jobs:
         name: dist
         path: dist
 
-    - name: Upload workspace
-      if: github.ref == 'refs/heads/working' #If we are are on master we are running a deploy so save the workspace #TODO
+    - name: Upload release files
       uses: actions/upload-artifact@v3
       with:
         name: workspace
-        path: .
+        path: |
+          package.json
+          Dockerfile
 
 
         
