@@ -30,7 +30,27 @@ jobs:
       run: npm run lint
 
     - name: Run e2e tests
+      id: tests
       run: npx vue-cli-service test:e2e --headless
+
+    - name: Get test screenshots
+      if: failure() && steps.tests.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: testScreenshots
+        path: |
+          tests/e2e/screenshots
+
+    - name: Get test videos
+      if: failure() && steps.tests.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: testVideo
+        path: |
+          tests/e2e/videos
+
+
+    
 
     - name: Build StoreDown artifacts
       run: npm run build
