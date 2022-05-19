@@ -11,7 +11,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: build
+    #needs: build
     steps:
       - name: Retrieve build
         uses: actions/download-artifact@v3
