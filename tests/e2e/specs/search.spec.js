@@ -1,5 +1,5 @@
 describe('List View', () => {
-  before(() => { //Don't need to reset anything
+  before(() => { // Don't need to reset anything
     cy.localMode()
     cy.loadTestData()
   })
@@ -9,11 +9,11 @@ describe('List View', () => {
     cy.get('input[placeholder="Search items"').type('8e71919a-4f03-4fa4-bdce-5767e38ed48e{enter}')
     cy.contains('USB A to USB C cable')
 
-    //Partial uuid
+    // Partial uuid
     cy.get('input[placeholder="Search items"').invoke('val', '').type('1a76be8{enter}')
     cy.contains('Dental floss pick')
 
-    //Click search with name
+    // Click search with name
     cy.get('input[placeholder="Search items"').invoke('val', '').type('USB A to USB C cable')
     cy.get('.v-btn__content').contains('Search').click()
     cy.contains('8ed48e')
