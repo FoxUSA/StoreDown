@@ -11,6 +11,3 @@ new Vue({
   router,
   render (h) { return h(App) }
 }).$mount('#app')
-
-// Require login
-router.beforeEach()

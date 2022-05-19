@@ -194,7 +194,7 @@ export default {
      */
     importYML: function () {
       try {
-        this.importItems(yaml.safeLoad(this.importText))
+        this.importItems(yaml.load(this.importText))
       } catch (error) {
         this.$toasted.error('Invalid YML')
       }

@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  pull_request:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [17.x]
+
+    steps:
+    - run: git config --global core.autocrlf false
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install StoreDown dependencies
+      run: npm ci
+
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run e2e tests
+      id: tests
+      run: npx vue-cli-service test:e2e --headless
+
+    - name: Get test screenshots
+      if: failure() && steps.tests.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: testScreenshots
+        path: |
+          tests/e2e/screenshots
+
+    - name: Get test videos
+      if: failure() && steps.tests.outcome == 'failure'
+      uses: actions/upload-artifact@v3
+      with:
+        name: testVideo
+        path: |
+          tests/e2e/videos
+
+    - name: Build StoreDown
+      run: npm run build
+
+    - name: Build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist
+
+    - name: Upload release files
+      uses: actions/upload-artifact@v3
+      with:
+        name: release
+        path: |
+          package.json
+          Dockerfile
+
+
+        
+
+

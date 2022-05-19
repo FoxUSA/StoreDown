@@ -11,7 +11,7 @@ export class ConfigService {
   static getConfigObject () {
     return new Promise((resolve, reject) => {
       ConfigService.getConfig().then((config) => {
-        return resolve(yaml.safeLoad(config.yml))
+        return resolve(yaml.load(config.yml))
       }).catch(reject)
     })
   }

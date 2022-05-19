@@ -232,9 +232,9 @@ export default {
       }
 
       if (!this.item._id) {
-        DatabaseService().getDatabase().post(this.item).then(callback)
+        DatabaseService().getDatabase().post(this.item).then(callback).catch(this.$toasted.error)
       } else {
-        DatabaseService().getDatabase().put(this.item).then(callback)
+        DatabaseService().getDatabase().put(this.item).then(callback).catch(this.$toasted.error)
       }
     },
     /**

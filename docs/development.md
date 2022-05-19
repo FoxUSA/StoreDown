@@ -36,6 +36,12 @@ npm run test:e2e
 npm run test:unit
 ```
 
+### Zip up the build folder
+```
+npm run dist
+```
+
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
