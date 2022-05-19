@@ -42,5 +42,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: foxusa/storedown:todolatest,foxusa/storedown:todo$RELEASE_VERSION
+          tags: foxusa/storedown:todolatest,foxusa/storedown:todo${{ env.RELEASE_VERSION }}
     
