@@ -14,11 +14,7 @@ You can download a [zip of the most recent release](https://github.com/FoxUSA/St
 ## Option 2: Using `docker`
 `docker run -d -p 8080:80 foxusa/storedown`
 
-<<<<<<< HEAD
 ## Option 3: Using `docker-compose`
-=======
-## Option 3: Using docker-compose
->>>>>>> master
 > If you want to use SSL/TLS skip this and go down to that section
 > 
 Put the following text in a `docker-compose.yml`. 
