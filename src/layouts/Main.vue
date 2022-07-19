@@ -157,7 +157,7 @@ export default {
 
 <style>
 /* Fade everything */
-* {
+.application * {  /* Just on application prevents blinkPrevent a white blink 2/2*/
   animation: fadein .5s;
 }
 
