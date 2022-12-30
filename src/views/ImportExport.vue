@@ -182,7 +182,7 @@ export default {
 
         if (errors.length) {
           this.$toasted.error(`${errors.length} items had errors.`)
-          saveAs(new Blob([yaml.safeDump(errors)], { type: 'text/plain;charset=utf-8' }), 'importErrors.yml')
+          saveAs(new Blob([yaml.dump(errors)], { type: 'text/plain;charset=utf-8' }), 'importErrors.yml')
         }
       }).catch((error) => {
         this.$toasted.error(`Error ${error}`)
@@ -227,7 +227,7 @@ export default {
       this.progressModalText = 'Generating YML extract...'
       // Get data
       DatabaseService().getAllItems().then((data) => {
-        saveAs(new Blob([yaml.safeDump(data.rows)], { type: 'text/plain;charset=utf-8' }), `${this.exportFileName}.yml`)
+        saveAs(new Blob([yaml.dump(data.rows)], { type: 'text/plain;charset=utf-8' }), `${this.exportFileName}.yml`)
         this.progressModalText = ''
       })
     },

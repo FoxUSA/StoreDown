@@ -47,7 +47,7 @@ export default {
               value: item.name,
               align: 'left',
               item: item, // So you can access all the parameters. Above are given in the data table support format.
-              sortable: false
+              sortable: true
             })
           })
         })
