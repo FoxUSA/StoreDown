@@ -28,6 +28,9 @@ export default {
     this.loadHeader()// Don't need to reload with route change
   },
   methods: {
+    /**
+     * Detect filter change for implementing the below filter to query specific items.
+     */
     onchange: function (event) {
       console.log(event)
       window.location.replace('/#/?filter=' + event)
@@ -75,12 +78,16 @@ export default {
 
         // Get items
         DatabaseService().getAllItems({ skip, limit }).then((data) => {
-          console.log(data)
           // Get query
+          // get the query from the GET variable via route.
           let newFilter = this.$route.query.filter
           if (newFilter === 'undefined') { newFilter = '' }
-          console.log(newFilter)
-          // console.log(newFilter.split(':')[1].toLowerCase())
+
+          // Using the new query, separate out the call from the value.  I.E path:house or tags:tool
+          // I also changed everything to lowercase so that capitalization is ignored in the filter.
+          // Lastly, the filter breaks if some objects or items do not have that category, so we must use a !! to make sure the property exists.
+          // Lastly, update the total_rows value to ensure the vue item count is correct.  This should probably be done with a CASE statement, but I am lazy.
+          // Might also want to make the command a .toLower as well, so that Name:Jig is the same as name:Jig
           if (newFilter) {
             let param = newFilter.split(':')[1].toLowerCase()
             if (newFilter.startsWith('name:')) {
