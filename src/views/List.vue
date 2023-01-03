@@ -78,20 +78,36 @@ export default {
           console.log(data)
           // Get query
           let newFilter = this.$route.query.filter
-          // console.log(newFilter)
-          // console.log(data.rows.filter(row => row.name.includes(newFilter)))
+          if (newFilter === 'undefined') { newFilter = '' }
+          console.log(newFilter)
           // console.log(newFilter.split(':')[1].toLowerCase())
           if (newFilter) {
             let param = newFilter.split(':')[1].toLowerCase()
             if (newFilter.startsWith('name:')) {
               data.rows = data.rows.filter(row => row.name.toLowerCase().includes(param))
             }
+            if (newFilter.startsWith('manufacturer:')) {
+              data.rows = data.rows.filter(row => !!row.manufacturer && row.manufacturer.toLowerCase().includes(param))
+            }
+            if (newFilter.startsWith('acquiredfrom:')) {
+              data.rows = data.rows.filter(row => !!row.acquiredFrom && row.acquiredFrom.toLowerCase().includes(param))
+            }
+            if (newFilter.startsWith('warranty:')) {
+              data.rows = data.rows.filter(row => !!row.warranty && row.warranty.toLowerCase().includes(param))
+            }
             if (newFilter.startsWith('location:')) {
-              data.rows = data.rows.filter(row => row.location.toLowerCase().includes(newFilter.split(':')[1].toLowerCase()))
+              data.rows = data.rows.filter(row => row.location.toLowerCase().includes(param))
+            }
+            if (newFilter.startsWith('pricepaid:')) {
+              data.rows = data.rows.filter(row => !!row.pricePaid && row.pricePaid.toLowerCase().includes(param))
             }
             if (newFilter.startsWith('tags:')) {
-              // data.rows = data.rows.filter(row => row.tags.includes(newFilter.split(':')[1].toLowerCase()))
+              data.rows = data.rows.filter(row => !!row.tags && row.tags.toString().toLowerCase().includes(param))
             }
+            if (newFilter.startsWith('weight:')) {
+              data.rows = data.rows.filter(row => !!row.weight && row.weight.toLowerCase().includes(param))
+            }
+            data.total_rows = data.rows.length
           }
           return resolve(data) // important we save an original copy. So we dont need to load it again. Espicially in tree view.
         })
