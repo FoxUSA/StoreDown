@@ -82,37 +82,34 @@ export default {
           // get the query from the GET variable via route.
           let newFilter = this.$route.query.filter
           if (newFilter === 'undefined') { newFilter = '' }
-
           // Using the new query, separate out the call from the value.  I.E path:house or tags:tool
           // I also changed everything to lowercase so that capitalization is ignored in the filter.
           // Lastly, the filter breaks if some objects or items do not have that category, so we must use a !! to make sure the property exists.
           // Lastly, update the total_rows value to ensure the vue item count is correct.  This should probably be done with a CASE statement, but I am lazy.
           // Might also want to make the command a .toLower as well, so that Name:Jig is the same as name:Jig
           if (newFilter) {
-            let param = newFilter.split(':')[1].toLowerCase()
+            let param = newFilter.toLowerCase()
+            if (newFilter.includes(':')) {
+              param = newFilter.split(':')[1].toLowerCase()
+            }
             if (newFilter.startsWith('name:')) {
               data.rows = data.rows.filter(row => row.name.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('manufacturer:')) {
+            } else if (newFilter.startsWith('manufacturer:')) {
               data.rows = data.rows.filter(row => !!row.manufacturer && row.manufacturer.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('acquiredfrom:')) {
+            } else if (newFilter.startsWith('acquiredfrom:')) {
               data.rows = data.rows.filter(row => !!row.acquiredFrom && row.acquiredFrom.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('warranty:')) {
+            } else if (newFilter.startsWith('warranty:')) {
               data.rows = data.rows.filter(row => !!row.warranty && row.warranty.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('location:')) {
+            } else if (newFilter.startsWith('location:')) {
               data.rows = data.rows.filter(row => row.location.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('pricepaid:')) {
+            } else if (newFilter.startsWith('pricepaid:')) {
               data.rows = data.rows.filter(row => !!row.pricePaid && row.pricePaid.toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('tags:')) {
+            } else if (newFilter.startsWith('tags:')) {
               data.rows = data.rows.filter(row => !!row.tags && row.tags.toString().toLowerCase().includes(param))
-            }
-            if (newFilter.startsWith('weight:')) {
+            } else if (newFilter.startsWith('weight:')) {
               data.rows = data.rows.filter(row => !!row.weight && row.weight.toLowerCase().includes(param))
+            } else {
+              data.rows = data.rows.filter(row => row.name.toLowerCase().includes(param))
             }
             data.total_rows = data.rows.length
           }
