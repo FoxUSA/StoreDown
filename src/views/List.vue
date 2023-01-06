@@ -88,28 +88,34 @@ export default {
           // Lastly, update the total_rows value to ensure the vue item count is correct.  This should probably be done with a CASE statement, but I am lazy.
           // Might also want to make the command a .toLower as well, so that Name:Jig is the same as name:Jig
           if (newFilter) {
-            let param = newFilter.toLowerCase()
+            // let param = newFilter.toLowerCase()
+            let re = RegExp()
             if (newFilter.includes(':')) {
-              param = newFilter.split(':')[1].toLowerCase()
+              // param = newFilter.split(':')[1].toLowerCase()
+              re = new RegExp(newFilter.split(':')[1].toLowerCase())
+            } else {
+              re = new RegExp(newFilter.toLowerCase())
             }
             if (newFilter.startsWith('name:')) {
-              data.rows = data.rows.filter(row => row.name.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.name && re.test(row.name))
+              // data.rows = data.rows.filter(row => row.name.toLowerCase().match(param))
             } else if (newFilter.startsWith('manufacturer:')) {
-              data.rows = data.rows.filter(row => !!row.manufacturer && row.manufacturer.toLowerCase().includes(param))
+              // data.rows = data.rows.filter(row => !!row.manufacturer && row.manufacturer.toLowerCase().match(param))
+              data.rows = data.rows.filter(row => !!row.manufacturer && re.test(row.manufacturer.toLowerCase()))
             } else if (newFilter.startsWith('acquiredfrom:')) {
-              data.rows = data.rows.filter(row => !!row.acquiredFrom && row.acquiredFrom.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.acquiredFrom && re.test(row.acquiredFrom.toLowerCase()))
             } else if (newFilter.startsWith('warranty:')) {
-              data.rows = data.rows.filter(row => !!row.warranty && row.warranty.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.warranty && re.test(row.warranty.toLowerCase()))
             } else if (newFilter.startsWith('location:')) {
-              data.rows = data.rows.filter(row => row.location.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.location && re.test(row.location.toLowerCase()))
             } else if (newFilter.startsWith('pricepaid:')) {
-              data.rows = data.rows.filter(row => !!row.pricePaid && row.pricePaid.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.pricePaid && re.test(row.pricePaid.toLowerCase()))
             } else if (newFilter.startsWith('tags:')) {
-              data.rows = data.rows.filter(row => !!row.tags && row.tags.toString().toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.tags && re.test(row.tags.toString().toLowerCase()))
             } else if (newFilter.startsWith('weight:')) {
-              data.rows = data.rows.filter(row => !!row.weight && row.weight.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => !!row.weight && re.test(row.weight.toLowerCase()))
             } else {
-              data.rows = data.rows.filter(row => row.name.toLowerCase().includes(param))
+              data.rows = data.rows.filter(row => re.test(row.name.toLowerCase()))
             }
             data.total_rows = data.rows.length
           }
