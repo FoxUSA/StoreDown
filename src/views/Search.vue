@@ -134,7 +134,6 @@ export default {
                 } else {
                   re = new RegExp(query.toLowerCase())
                 }
-                console.log(re)
                 if (query.startsWith('name:')) {
                   data.rows = data.rows.filter(row => !!row.name && re.test(row.name.toLowerCase()))
                 } else if (query.startsWith('manufacturer:')) {
