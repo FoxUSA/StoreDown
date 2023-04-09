@@ -9,7 +9,7 @@ StoreDown will let use the rest of that box.
 The second and maybe more important is to place stuff pseudo randomly.
 This creates a positive feedback loop where you have to use StoreDown to find stuff. This helps keep the data accurate. 
  
-Putting items together logically makes it easier for you to pull items without using StoreDown. This causes a negative feedback loop where the data in StoreDown becomes less acuate and less useful hence causing you to use it less.
+Putting items together logically makes it easier for you to pull items without using StoreDown. This causes a negative feedback loop where the data in StoreDown becomes less accurate and less useful hence causing you to use it less.
 
 Random placement also has an advantage that someone who is unfamiliar with an item is less likely to be confused. You are not very likely to be looking for a black USB cable in a box full of black cables if you placed them randomly.
 
