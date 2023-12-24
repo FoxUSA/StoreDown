@@ -118,15 +118,48 @@ export default {
           // Setup fuse
           let fuseOptions = {
             // shouldSort: true,//TODO
-            threshold: 0.3,
+            threshold: 1.0,
             keys: keys
           }
 
           let loopFunction = () => {
             DatabaseService().getAllItems({ skip: i, limit: RECORD_TO_PULL }).then((data) => {
+              // Modify with regex
+              query = this.$route.query.query
+              if (query) {
+                let re = RegExp()
+                if (query.includes(':')) {
+                  // param = query.split(':')[1].toLowerCase()
+                  re = new RegExp(query.split(':')[1].toLowerCase())
+                } else {
+                  re = new RegExp(query.toLowerCase())
+                }
+                if (query.startsWith('name:')) {
+                  data.rows = data.rows.filter(row => !!row.name && re.test(row.name.toLowerCase()))
+                } else if (query.startsWith('manufacturer:')) {
+                  data.rows = data.rows.filter(row => !!row.manufacturer && re.test(row.manufacturer.toLowerCase()))
+                } else if (query.startsWith('acquiredfrom:')) {
+                  data.rows = data.rows.filter(row => !!row.acquiredFrom && re.test(row.acquiredFrom.toLowerCase()))
+                } else if (query.startsWith('warranty:')) {
+                  data.rows = data.rows.filter(row => !!row.warranty && re.test(row.warranty.toLowerCase()))
+                } else if (query.startsWith('location:')) {
+                  data.rows = data.rows.filter(row => !!row.location && re.test(row.location.toLowerCase()))
+                } else if (query.startsWith('pricepaid:')) {
+                  data.rows = data.rows.filter(row => !!row.pricePaid && re.test(row.pricePaid.toLowerCase()))
+                } else if (query.startsWith('tags:')) {
+                  data.rows = data.rows.filter(row => !!row.tags && re.test(row.tags.toString().toLowerCase()))
+                } else if (query.startsWith('weight:')) {
+                  data.rows = data.rows.filter(row => !!row.weight && re.test(row.weight.toLowerCase()))
+                } else {
+                  data.rows = data.rows.filter(row => re.test(row.name.toLowerCase()))
+                }
+                data.total_rows = data.rows.length
+              }
+              // end regex mods
+
               i += data.rows.length || 10// If no items are returned the database only has config. We need to add some manually so we dont loop forever
 
-              results = results.concat((new Fuse(data.rows, fuseOptions)).search(query))
+              results = results.concat((new Fuse(data.rows, fuseOptions).search(' ')))
 
               let resultsToSkip = skipResults - resultsSkipped
               if (resultsToSkip > 0) {
