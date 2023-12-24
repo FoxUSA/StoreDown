@@ -34,7 +34,8 @@ services:
     image: couchdb
     restart: always
     volumes:
-      - "<HOST_LOCATION>:/opt/couchdb/data" #TODO set this to prevent accidentally deleting your database data
+      - <HOST_LOCATION>:/opt/couchdb/data #TODO set this to prevent accidentally deleting your database data
+      - <HOST_LOCATION>:/opt/couchdb/etc/local.d # Prevents CORS setting from being removed
     ports:
       - "5984:5984"
     environment:
