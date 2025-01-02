@@ -4,5 +4,9 @@ module.exports = {
   publicPath: './',
   configureWebpack: {
 
+  },
+  pluginOptions: {
+    vuetify: {
+    }
   }
 }

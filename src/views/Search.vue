@@ -2,7 +2,7 @@
   <v-container grid-list-lg fluid>
     <v-layout>
       <v-flex xs6>
-        <h4 class="display-1">Search results</h4>
+        <h4 class="text-h4">Search results</h4>
       </v-flex>
     </v-layout>
     <!-- TODO QR code link generator -->

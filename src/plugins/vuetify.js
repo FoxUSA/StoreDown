@@ -1,7 +1,11 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
-import 'vuetify/src/stylus/app.styl'
+// import this after install `@mdi/font` package
+import '@mdi/font/css/materialdesignicons.css'
 
-Vue.use(Vuetify, {
-  iconfont: 'md'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'dark'
+  }
 })

@@ -2,12 +2,12 @@
   <v-container grid-list-lg fluid>
     <v-layout>
       <v-flex xs9>
-        <h4 class="display-1"> Configuration </h4>
+        <h4 class="text-h4"> Configuration </h4>
 
       </v-flex>
 
       <v-flex xs3 text-xs-right >
-        <v-btn color="success" depressed @click.stop="save">
+        <v-btn color="success" variant="flat" @click.stop="save">
           Save
         </v-btn>
       </v-flex>

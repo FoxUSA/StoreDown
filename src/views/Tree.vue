@@ -2,14 +2,12 @@
 <v-container grid-list-lg fluid>
   <v-layout>
     <v-flex xs12>
-      <h4 v-if="!$route.query.prefix" class="display-1">Item tree</h4>
-      <h5 v-else class="headline">
+      <h4 v-if="!$route.query.prefix" class="text-h4">Item tree</h4>
+      <h5 v-else class="text-h5">
         <button @click="breadcrumbsClick(-1)">Item tree</button>
         /
-        <template v-for="(p, i) in prefix">
-          <button :key="p" @click="breadcrumbsClick(i)">{{p}}</button>
+          <button v-for="(p, i) in prefix" :key="p" @click="breadcrumbsClick(i)">{{p}}</button>
           /
-        </template>
       </h5>
 
     </v-flex>

@@ -3,7 +3,7 @@
   <v-layout align-center justify-center wrap>
     <v-flex xs12>
       <v-alert :value="loggedIn" color="success">
-        You are currently logged in. <v-btn depressed flat small @click.stop="logOut">Click here to log out.</v-btn>
+        You are currently logged in. <v-btn variant="flat" size="small" @click.stop="logOut">Click here to log out.</v-btn>
       </v-alert>
     </v-flex>
 
@@ -30,9 +30,9 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn depressed small @click.stop="skip" color="">Run in local/demo mode</v-btn>
+          <v-btn variant="flat" size="small" @click.stop="skip" color="">Run in local/demo mode</v-btn>
           <v-spacer></v-spacer>
-          <v-btn depressed @click.stop="login" color="primary">Login</v-btn>
+          <v-btn variant="flat" @click.stop="login" color="primary">Login</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>

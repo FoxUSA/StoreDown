@@ -2,18 +2,18 @@
 <v-container grid-list-lg fluid>
   <v-layout>
     <v-flex xs3>
-      <h4 class="display-1"> Item Editor</h4>
+      <h4 class="text-h4"> Item Editor</h4>
     </v-flex>
 
     <v-flex xs9 text-xs-right>
-      <v-btn small v-if="item._id" color="info" depressed @click.stop="duplicate">
+      <v-btn size="small" v-if="item._id" color="info" variant="flat" @click.stop="duplicate">
         Duplicate
       </v-btn><!-- TODO  add a quantity field that automatically insert that number of copies with different ids. Only for new items? -->
-      <v-btn small color="success" depressed @click.stop="save">
+      <v-btn size="small" color="success" variant="flat" @click.stop="save">
         Save
       </v-btn>
 
-      <v-btn small color="error" depressed @click.stop="tempState.deleteConfirm=true">
+      <v-btn size="small" color="error" variant="flat" @click.stop="tempState.deleteConfirm=true">
         Delete
       </v-btn>
     </v-flex>
@@ -25,7 +25,7 @@
     <v-flex d-flex :class="[group.size ? `xs${group.size}` : 'xs12 lg6 xl4']" v-for="group in dataDefinition" :key="group.displayName">
       <v-card flat :class="group.color">
         <v-card-title>
-          <h5 class="headline">{{group.displayName}}</h5>
+          <h5 class="text-h5">{{group.displayName}}</h5>
         </v-card-title>
 
         <v-card-actions>
@@ -48,8 +48,8 @@
                     <!-- list -->
                     <template v-if="field.type=='list'">
                       <v-combobox :color="field.color ? field.color :'white'" v-model="item[field.name]" :label="field.displayName" chips clearable multiple>
-                        <template v-slot:selection="data">
-                          <v-chip :selected="data.selected" close @input="item[field.name].splice(item[field.name].indexOf(data.item), 1)">
+                        <template v-slot:chip="data">
+                          <v-chip :value="data.selected" closable @update:model-value="item[field.name].splice(item[field.name].indexOf(data.item), 1)">
 
                             <!-- List full of links -->
                             <strong v-if="field.listType=='link'">
@@ -64,9 +64,10 @@
                     </template>
 
                     <!-- Date -->
-                    <v-menu v-if="field.type=='date'" v-model="fieldStates[field.name]" :close-on-content-click="false" :nudge-right="40" lazy transition="scale-transition" offset-y full-width min-width="290px">
-                      <template v-slot:activator="{ on }">
-                        <v-text-field v-model="item[field.name]" :label="field.displayName" v-on="on"></v-text-field>
+                    <v-menu v-if="field.type=='date'" v-model="fieldStates[field.name]" :close-on-content-click="false" lazy transition="scale-transition" full-width min-width="290px">
+                      <!-- TODO :nudge-right="40" offset-y -->
+                      <template v-slot:activator="{ props }">
+                        <v-text-field v-model="item[field.name]" :label="field.displayName" v-bind="props"></v-text-field>
                       </template>
                       <v-date-picker v-model="item[field.name]" @input="fieldStates[field.name] = false"></v-date-picker>
                     </v-menu>
@@ -78,10 +79,10 @@
                     <template v-if="field.type=='libraryStyleStatus'">
                       <v-layout>
                         <v-flex xs6>
-                          <v-btn depressed block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,true)" :disabled="getOrSetDefault(field,{}).status">Check In</v-btn>
+                          <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,true)" :disabled="getOrSetDefault(field,{}).status">Check In</v-btn>
                         </v-flex>
                         <v-flex xs6>
-                          <v-btn depressed block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,false)" :disabled="!getOrSetDefault(field,{}).status">Check Out</v-btn>
+                          <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,false)" :disabled="!getOrSetDefault(field,{}).status">Check Out</v-btn>
                         </v-flex>
                       </v-layout>
                     </template>
@@ -99,16 +100,16 @@
 
   <v-dialog v-model="tempState.deleteConfirm" width="500">
     <v-card>
-      <v-card-title class="headline">Delete</v-card-title>
+      <v-card-title class="text-h5">Delete</v-card-title>
       <v-card-text>
         Are you sure you want to delete this item?
       </v-card-text>
       <v-card-actions>
-        <v-btn color="" depressed @click.stop="tempState.deleteConfirm=false">
+        <v-btn color="" variant="flat" @click.stop="tempState.deleteConfirm=false">
           Cancel
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="error" depressed @click.stop="deleteItem">
+        <v-btn color="error" variant="flat" @click.stop="deleteItem">
           Delete
         </v-btn>
       </v-card-actions>

@@ -1,13 +1,19 @@
-import Vue from 'vue'
-import './plugins/vuetify'
+import { createApp } from 'vue'
 import './plugins/toasted'
 import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
+import vuetify from './plugins/vuetify'
+import Toasted from '@hoppscotch/vue-toasted'
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
-new Vue({
-  router,
-  render (h) { return h(App) }
-}).$mount('#app')
+createApp(App)
+  .use(router)
+  .use(vuetify)
+  .use(Toasted, {
+    duration: '2000',
+    position: 'bottom-right',
+    keepOnHover: true
+  })
+  .mount('#app')

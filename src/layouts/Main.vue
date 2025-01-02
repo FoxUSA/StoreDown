@@ -1,114 +1,99 @@
 <template>
-<v-app dark>
+<v-app>
   <!-- Left menu -->
-  <v-navigation-drawer v-model="drawer" fixed clipped app :width="150">
+  <v-navigation-drawer v-model="drawer" :width="150">
 
+    <!-- TODO fixed clipped app-->
     <!-- Discovery -->
-    <v-subheader class="mt-3 grey--text text--darken-1">
+    <v-list-subheader class="mt-3 text-grey-darken-1">
       Discovery
-    </v-subheader>
-    <v-list dense>
-      <v-list-tile to="/search/">
-        <v-list-tile-content>
-          <v-list-tile-title>
-            Search
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+    </v-list-subheader>
+    <v-list density="compact">
+      <v-list-item to="/search/">
+        <v-list-item-title>
+          Search
+        </v-list-item-title>
+      </v-list-item>
 
-      <v-list-tile to="/tree/">
-        <v-list-tile-content>
-          <v-list-tile-title>
-            Item tree
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item to="/tree/">
+        <v-list-item-title>
+          Item tree
+        </v-list-item-title>
+      </v-list-item>
 
-      <v-list-tile to="/">
-        <v-list-tile-content>
-          <v-list-tile-title>
-            Item list
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item to="/">
+        <v-list-item-title>
+          Item list
+        </v-list-item-title>
+      </v-list-item>
 
-      <v-list-tile to="/change-feed">
-        <v-list-tile-content>
-          <v-list-tile-title>
-            Change feed
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item to="/change-feed">
+        <v-list-item-title>
+          Change feed
+        </v-list-item-title>
+      </v-list-item>
     </v-list>
 
-    <v-subheader class="mt-3 grey--text text--darken-1">
+    <v-list-subheader class="mt-3 text-grey-darken-1">
       Modification
-    </v-subheader>
-    <v-list dense>
-      <v-list-tile to="/entry/">
-        <v-list-tile-content>
-          <v-list-tile-title>
-            New item
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+    </v-list-subheader>
+    <v-list density="compact">
+      <v-list-item to="/entry/">
+        <v-list-item-title>
+          New item
+        </v-list-item-title>
+      </v-list-item>
     </v-list>
 
     <!-- Settings -->
-    <v-subheader class="mt-3 grey--text text--darken-1">
+    <v-list-subheader class="mt-3 text-grey-darken-1">
       Settings
-    </v-subheader>
-    <v-list dense>
-      <v-list-tile to="/config">
-        <v-list-tile-content>
-          <v-list-tile-title class="grey--text text--darken-1">
-            Configuration
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+    </v-list-subheader>
+    <v-list density="compact">
+      <v-list-item to="/config">
+        <v-list-item-title class="text-grey-darken-1">
+          Configuration
+        </v-list-item-title>
+      </v-list-item>
 
-      <v-list-tile to="/connection">
-        <v-list-tile-content>
-          <v-list-tile-title class="grey--text text--darken-1">
-            Connection
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item to="/connection">
+        <v-list-item-title class="text-grey-darken-1">
+          Connection
+        </v-list-item-title>
+      </v-list-item>
 
-      <v-list-tile to="/import-export">
-        <v-list-tile-content>
-          <v-list-tile-title class="grey--text text--darken-1">
-            Import/export
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <v-list-item to="/import-export">
+        <v-list-item-title class="text-grey-darken-1">
+          Import/export
+        </v-list-item-title>
+      </v-list-item>
     </v-list>
 
-    <v-subheader class="caption mt-3 grey--text text--darken-2 fade-out-legal">
+    <v-list-subheader class="text-caption mt-3 text-grey-darken-2 fade-out-legal">
       &#169; 2022 Jacob Liscom <br /> Version: {{version}}
-    </v-subheader>
+    </v-list-subheader>
   </v-navigation-drawer>
 
   <!-- Toolbar -->
   <v-toolbar color="blue" dense fixed clipped-left app flat>
     <v-toolbar-title v-ripple style="cursor: pointer; overflow: visible;">
-      <span class="title" @click.stop="drawer = !drawer">StoreDown</span>
+      <span class="text-h6" @click.stop="drawer = !drawer">StoreDown</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
 
     <v-text-field @keyup.enter="search" placeholder="Search items" single-line color="white" class="py-0 ml-2" v-model='searchString' hide-details />
     <v-toolbar-items >
-      <v-btn flat @click.stop="search" style="min-width:0">
+      <v-btn variant="flat" @click.stop="search" style="min-width:0">
         Search
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 
   <!-- Main content -->
-  <v-content>
+  <v-main>
     <router-view />
-  </v-content>
+  </v-main>
 
 </v-app>
 </template>

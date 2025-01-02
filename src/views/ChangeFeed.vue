@@ -2,7 +2,7 @@
 <v-container grid-list-lg fluid>
   <v-layout>
     <v-flex xs6>
-      <h4 class="display-1">Change feed</h4>
+      <h4 class="text-h4">Change feed</h4>
     </v-flex>
   </v-layout>
   <v-layout>

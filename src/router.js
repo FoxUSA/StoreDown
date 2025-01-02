@@ -1,12 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { ConfigService } from './services/Config.js'
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'hash',
-  base: process.env.BASE_URL,
+export default createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',

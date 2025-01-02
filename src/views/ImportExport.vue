@@ -2,7 +2,7 @@
   <v-container grid-list-lg fluid>
     <v-layout>
       <v-flex xs9>
-        <h4 class="display-1">Import/Export</h4>
+        <h4 class="text-h4">Import/Export</h4>
       </v-flex>
     </v-layout>
 
@@ -10,14 +10,14 @@
       <v-flex xs12 md6>
         <v-card flat>
           <v-card-title>
-            <h5 class="headline">Database</h5>
+            <h5 class="text-h5">Database</h5>
           </v-card-title>
 
           <v-card-actions>
             <v-container fluid class="pt-0">
               <v-layout wrap>
                 <v-flex xs12 sm6 xl4>
-                  <v-btn depressed block @click.stop="deleteConfirm=true">Empty database</v-btn>
+                  <v-btn variant="flat" block @click.stop="deleteConfirm=true">Empty database</v-btn>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -29,7 +29,7 @@
       <v-flex xs12 lg6>
         <v-card flat>
           <v-card-title>
-            <h5 class="headline">Export</h5>
+            <h5 class="text-h5">Export</h5>
           </v-card-title>
 
           <v-card-actions>
@@ -38,13 +38,13 @@
                 <v-form class="flex xs12">
                   <v-layout wrap>
                     <v-flex xs12 sm4 >
-                      <v-btn depressed block @click.stop="exportYML">Export YML</v-btn>
+                      <v-btn variant="flat" block @click.stop="exportYML">Export YML</v-btn>
                     </v-flex>
                     <v-flex xs12 sm4 >
-                      <v-btn depressed block @click.stop="exportJSON">Export JSON</v-btn>
+                      <v-btn variant="flat" block @click.stop="exportJSON">Export JSON</v-btn>
                     </v-flex>
                     <v-flex xs12 sm4 >
-                      <v-btn depressed block @click.stop="exportCSV">Export CSV</v-btn>
+                      <v-btn variant="flat" block @click.stop="exportCSV">Export CSV</v-btn>
                     </v-flex>
                   </v-layout>
                 </v-form>
@@ -58,7 +58,7 @@
       <v-flex xs12 lg6>
         <v-card flat>
           <v-card-title>
-            <h5 class="headline">Import</h5>
+            <h5 class="text-h5">Import</h5>
           </v-card-title>
 
           <v-card-actions>
@@ -70,10 +70,10 @@
                       <v-textarea flat v-model="importText" label="Import" hint="YML or JSON paste"></v-textarea>
                     </v-flex>
                     <v-flex xs12 sm6>
-                      <v-btn depressed block @click.stop="importYML">Import YML</v-btn>
+                      <v-btn variant="flat" block @click.stop="importYML">Import YML</v-btn>
                     </v-flex>
                     <v-flex xs12 sm6>
-                      <v-btn depressed block @click.stop="importJSON">Import JSON</v-btn>
+                      <v-btn variant="flat" block @click.stop="importJSON">Import JSON</v-btn>
                     </v-flex>
                   </v-layout>
                 </v-form>
@@ -88,17 +88,17 @@
     <v-dialog v-model="deleteConfirm" width="500" :persistent="deleteInProgress">
       <v-card>
         <template v-if="!deleteInProgress">
-          <v-card-title class="headline">Delete</v-card-title>
+          <v-card-title class="text-h5">Delete</v-card-title>
           <v-card-text>
             Are you sure you want to delete all items in the database?
             This will also delete record on the database server.
           </v-card-text>
           <v-card-actions>
-            <v-btn color="" depressed @click.stop="deleteConfirm=false">
+            <v-btn color="" variant="flat" @click.stop="deleteConfirm=false">
               Cancel
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="error" depressed @click.stop="destroyDatabase">
+            <v-btn color="error" variant="flat" @click.stop="destroyDatabase">
               Delete
             </v-btn>
           </v-card-actions>
@@ -113,7 +113,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog :value="progressModalText.length>0" width="500" :persistent="true">
+    <v-dialog :model-value="progressModalText.length>0" width="500" :persistent="true">
       <v-card>
         <v-card-text>
           {{progressModalText}}
