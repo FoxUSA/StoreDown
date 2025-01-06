@@ -1,13 +1,13 @@
 <template>
   <v-container grid-list-lg fluid>
-    <v-layout>
-      <v-flex xs9>
+    <v-row>
+      <v-col cols="9">
         <h4 class="text-h4">Import/Export</h4>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
-    <v-layout wrap>
-      <v-flex xs12 md6>
+    <v-row>
+      <v-col cols="12" md="6">
         <v-card flat>
           <v-card-title>
             <h5 class="text-h5">Database</h5>
@@ -15,18 +15,18 @@
 
           <v-card-actions>
             <v-container fluid class="pt-0">
-              <v-layout wrap>
-                <v-flex xs12 sm6 xl4>
+              <v-row>
+                <v-col cols="12" sm="6" xl="4">
                   <v-btn variant="flat" block @click.stop="deleteConfirm=true">Empty database</v-btn>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-container>
           </v-card-actions>
 
         </v-card>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 lg6>
+      <v-col cols="12" lg="6">
         <v-card flat>
           <v-card-title>
             <h5 class="text-h5">Export</h5>
@@ -34,28 +34,28 @@
 
           <v-card-actions>
             <v-container fluid class="pt-0">
-              <v-layout wrap>
-                <v-form class="flex xs12">
-                  <v-layout wrap>
-                    <v-flex xs12 sm4 >
+              <v-row>
+                <v-form class="flex" cols="12">
+                  <v-row>
+                    <v-col cols="12" sm="4">
                       <v-btn variant="flat" block @click.stop="exportYML">Export YML</v-btn>
-                    </v-flex>
-                    <v-flex xs12 sm4 >
+                    </v-col>
+                    <v-col cols="12" sm="4">
                       <v-btn variant="flat" block @click.stop="exportJSON">Export JSON</v-btn>
-                    </v-flex>
-                    <v-flex xs12 sm4 >
+                    </v-col>
+                    <v-col cols="12" sm="4">
                       <v-btn variant="flat" block @click.stop="exportCSV">Export CSV</v-btn>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
                 </v-form>
-              </v-layout>
+              </v-row>
             </v-container>
           </v-card-actions>
 
         </v-card>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 lg6>
+      <v-col cols="12" lg="6">
         <v-card flat>
           <v-card-title>
             <h5 class="text-h5">Import</h5>
@@ -63,27 +63,27 @@
 
           <v-card-actions>
             <v-container fluid class="pt-0">
-              <v-layout wrap>
-                <v-form class="flex xs12">
-                  <v-layout wrap>
-                    <v-flex xs12>
+              <v-row>
+                <v-form class="flex" cols="12">
+                  <v-row>
+                    <v-col cols="12">
                       <v-textarea flat v-model="importText" label="Import" hint="YML or JSON paste"></v-textarea>
-                    </v-flex>
-                    <v-flex xs12 sm6>
+                    </v-col>
+                    <v-col cols="12" sm="6">
                       <v-btn variant="flat" block @click.stop="importYML">Import YML</v-btn>
-                    </v-flex>
-                    <v-flex xs12 sm6>
+                    </v-col>
+                    <v-col cols="12" sm="6">
                       <v-btn variant="flat" block @click.stop="importJSON">Import JSON</v-btn>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
                 </v-form>
-              </v-layout>
+              </v-row>
             </v-container>
           </v-card-actions>
 
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-dialog v-model="deleteConfirm" width="500" :persistent="deleteInProgress">
       <v-card>
@@ -258,8 +258,8 @@ export default {
       // Get data
       DatabaseService().getAllItems().then((data) => {
         data.rows.forEach((item) => { // Stringify escape object field types
-          objectColumns.forEach((excapeField) => {
-            item[excapeField] = JSON.stringify(item[excapeField])
+          objectColumns.forEach((escapeField) => {
+            item[escapeField] = JSON.stringify(item[escapeField])
           })
         })
         saveAs(new Blob([Papa.unparse(data.rows, {

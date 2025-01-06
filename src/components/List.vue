@@ -1,7 +1,7 @@
 <template>
-<v-layout>
-  <v-flex xs12>
-    <v-data-table :headers="headers" :pagination.sync="pagination" :items="data.rows" :loading="loading" :total-items="data.total_rows" :rows-per-page-items="[10,50,100,1000]">
+<v-row>
+  <v-col cols="12">
+    <v-data-table-virtual :headers="headers" :items="data.rows" :loading="loading" :total-items="data.total_rows" :rows-per-page-items="[10,50,100,1000]">
       <template v-slot:items="props">
         <ListColumnTypes :props="props" :headers="headers" :rowClick="rowClick" />
       </template>
@@ -11,9 +11,9 @@
           No data was found.
         </v-alert>
       </template>
-    </v-data-table>
-  </v-flex>
-</v-layout>
+    </v-data-table-virtual>
+  </v-col>
+</v-row>
 </template>
 
 <script>
@@ -29,25 +29,17 @@ export default {
     loadData: Function
   },
   watch: {
-    pagination: {
-      handler () {
-        this.getData()
-      },
-      deep: true
-    },
     '$route' (to, from) {
       this.getData()
     }
   },
   data: () => ({
-    pagination: {},
     loading: false,
     data: {}
   }),
-  // mounted () {
-  //   //Commented out. Pagination handler was calling getData
-  //   this.getData()
-  // },
+  mounted () {
+    this.getData()
+  },
   methods: {
     /**
      * Calls loadData and handles pagination parameters and loading bar
@@ -55,9 +47,8 @@ export default {
     getData: function () {
       this.loading = true
       this.data.rows = []
-      let start = (this.pagination.page - 1) * this.pagination.rowsPerPage
 
-      this.loadData(start, this.pagination.rowsPerPage).then((data) => {
+      this.loadData().then((data) => {
         this.data = data
         this.loading = false
       }).catch((error) => {

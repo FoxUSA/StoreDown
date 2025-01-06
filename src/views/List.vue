@@ -1,10 +1,10 @@
 <template>
 <v-container grid-list-lg fluid>
-  <v-layout>
-    <v-flex xs6>
+  <v-row>
+    <v-col cols="6">
       <h4 class="text-h4">Item list</h4>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
   <!-- TODO QR code link generator -->
   <List :headers="headers" :loadData="loadData" :rowClick="rowClick" />
 </v-container>
@@ -43,8 +43,8 @@ export default {
             if (item.hideInList) { return }
 
             this.headers.push({
-              text: item.displayName,
-              value: item.name,
+              title: item.displayName,
+              key: item.name,
               align: 'left',
               item: item, // So you can access all the parameters. Above are given in the data table support format.
               sortable: false
@@ -71,12 +71,12 @@ export default {
 
         // Get items
         DatabaseService().getAllItems({ skip, limit }).then((data) => {
-          return resolve(data) // important we save an original copy. So we dont need to load it again. Espicially in tree view.
+          return resolve(data) // important we save an original copy. So we don't need to load it again. Especially in tree view.
         })
       })
     },
     /**
-     * Hande logic for when a row is clicked
+     * Handle logic for when a row is clicked
      * @param  {[type]} props  [description]
      */
     rowClick: function (props) {

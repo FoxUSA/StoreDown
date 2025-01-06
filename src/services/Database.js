@@ -1,6 +1,6 @@
 import { ConfigService } from '../services/Config.js'
 import PouchDB from 'pouchdb-browser'
-import Vue from 'vue'
+import Toasted from '@hoppscotch/vue-toasted'
 
 let Database = class {
   /**
@@ -60,11 +60,11 @@ export default function (forceCreate, replicationCompleteCallback) {
       },
       syncCallback: function (syncObject) {
         syncObject.on('error', function () {
-          Vue.toasted.error('Replication error')
+          Toasted.error('Replication error')
         }).on('paused', function () {
           clearTimeout(replicationTimeout)
           replicationTimeout = setTimeout(function () {
-            Vue.toasted.info('Replication complete')
+            Toasted.info('Replication complete')
             replicationTimeout = null
             if (replicationCompleteCallback) { replicationCompleteCallback() }// Let folks know
           }, REPLICATION_TIMEOUT_DURATION)

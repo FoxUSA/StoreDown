@@ -1,33 +1,32 @@
 <template>
   <v-container grid-list-lg fluid>
-    <v-layout>
-      <v-flex xs9>
+    <v-row>
+      <v-col cols="9">
         <h4 class="text-h4"> Configuration </h4>
+      </v-col>
 
-      </v-flex>
-
-      <v-flex xs3 text-xs-right >
+      <v-col cols="3" text-xs-right >
         <v-btn color="success" variant="flat" @click.stop="save">
           Save
         </v-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
-    <v-layout>
-      <v-flex xs12>
+    <v-row>
+      <v-col cols="12">
         <v-card flat fill-height>
           <v-card-actions>
             <v-container fluid>
-              <v-layout wrap>
-                <v-flex xs12>
+              <v-row>
+                <v-col cols="12">
                   <v-textarea auto-grow  flat v-model="config.yml" label="Config YAML" hint="StoreDown config"></v-textarea>
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-container>
           </v-card-actions>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -1,13 +1,13 @@
 <template>
 <v-container fluid row fill-height grid-list-lg class="pt-0">
-  <v-layout align-center justify-center wrap>
-    <v-flex xs12>
+  <v-row align-center justify-center wrap>
+    <v-col cols="12">
       <v-alert :value="loggedIn" color="success">
         You are currently logged in. <v-btn variant="flat" size="small" @click.stop="logOut">Click here to log out.</v-btn>
       </v-alert>
-    </v-flex>
+    </v-col>
 
-    <v-flex xs12 >
+    <v-col cols="12" >
       <v-card flat>
         <v-toolbar color="primary" dark flat>
           <v-toolbar-title>Database login</v-toolbar-title>
@@ -35,8 +35,8 @@
           <v-btn variant="flat" @click.stop="login" color="primary">Login</v-btn>
         </v-card-actions>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 
   <v-dialog v-model="progressModal" width="500" :persistent="true">
     <v-card>

@@ -1,6 +1,6 @@
 {
   "name": "storedown",
-  "version": "22.04.04",
+  "version": "25.01.00",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

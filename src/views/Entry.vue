@@ -1,11 +1,11 @@
 <template>
 <v-container grid-list-lg fluid>
-  <v-layout>
-    <v-flex xs3>
+  <v-row>
+    <v-col cols="3">
       <h4 class="text-h4"> Item Editor</h4>
-    </v-flex>
+    </v-col>
 
-    <v-flex xs9 text-xs-right>
+    <v-col cols="9" text-xs-right>
       <v-btn size="small" v-if="item._id" color="info" variant="flat" @click.stop="duplicate">
         Duplicate
       </v-btn><!-- TODO  add a quantity field that automatically insert that number of copies with different ids. Only for new items? -->
@@ -16,87 +16,85 @@
       <v-btn size="small" color="error" variant="flat" @click.stop="tempState.deleteConfirm=true">
         Delete
       </v-btn>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 
   <!-- TODO QR code generator -->
 
-  <v-layout wrap>
-    <v-flex d-flex :class="[group.size ? `xs${group.size}` : 'xs12 lg6 xl4']" v-for="group in dataDefinition" :key="group.displayName">
-      <v-card flat :class="group.color">
+  <v-row>
+    <v-col :class="[group.size ? `v-col-${group.size}` : 'v-col-12 v-col-lg-6 v-col-xl-4']" v-for="group in dataDefinition" :key="group.displayName">
+      <v-card flat :color="group.color">
         <v-card-title>
           <h5 class="text-h5">{{group.displayName}}</h5>
         </v-card-title>
 
         <v-card-actions>
-          <v-container fluid class="pt-0">
-            <v-layout wrap>
-              <v-form class="flex xs12">
-                <v-layout wrap>
-                  <v-flex :class="field.size ? `xs${field.size}` : 'xs12 sm6 xl4'" v-for="field in group.fields" :key="field.name">
+          <v-form cols="12">
+            <v-container>
+              <v-row>
+                <v-col :class="field.size ? `v-col-${field.size}` : 'v-col-12 v-col-sm-6 v-col-xl-4'" v-for="field in group.fields" :key="field.name">
 
-                    <!-- String  -->
-                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='string'" v-model="item[field.name]" :label="field.displayName" :disabled="field.disabled"></v-text-field>
+                  <!-- String  -->
+                  <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='string'" v-model="item[field.name]" :label="field.displayName" :disabled="field.disabled"></v-text-field>
 
-                    <!-- path -->
-                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='path'" v-model="item[field.name]" :label="field.displayName" :prefix="field.prefixes[(item[field.name]|| '').toLowerCase()]" :disabled="field.disabled"></v-text-field>
+                  <!-- path -->
+                  <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='path'" v-model="item[field.name]" :label="field.displayName" :prefix="field.prefixes[(item[field.name]|| '').toLowerCase()]" :disabled="field.disabled"></v-text-field>
 
-                    <!-- lastDate or last modified-->
-                    <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='lastDate' || field.type=='lastModified' " v-model="item[field.name]" :label="field.displayName" :disabled="true"></v-text-field>
+                  <!-- lastDate or last modified-->
+                  <v-text-field :color="field.color ? field.color :'white'" v-if="field.type=='lastDate' || field.type=='lastModified' " v-model="item[field.name]" :label="field.displayName" :disabled="true"></v-text-field>
 
-                    <!-- TODO Markdown Default being rendered, click edit button to get text area -->
-                    <!-- list -->
-                    <template v-if="field.type=='list'">
-                      <v-combobox :color="field.color ? field.color :'white'" v-model="item[field.name]" :label="field.displayName" chips clearable multiple>
-                        <template v-slot:chip="data">
-                          <v-chip :value="data.selected" closable @update:model-value="item[field.name].splice(item[field.name].indexOf(data.item), 1)">
+                  <!-- TODO Markdown Default being rendered, click edit button to get text area -->
+                  <!-- list -->
+                  <template v-if="field.type=='list'">
+                    <v-combobox :color="field.color ? field.color :'white'" v-model="item[field.name]" :label="field.displayName" chips clearable multiple>
+                      <template v-slot:chip="data">
+                        <v-chip :value="data.selected" closable @update:model-value="item[field.name].splice(item[field.name].indexOf(data.item), 1)">
 
-                            <!-- List full of links -->
-                            <strong v-if="field.listType=='link'">
-                              <a :href="data.item" target="_blank">Link</a>
-                            </strong>
+                          <!-- List full of links -->
+                          <strong v-if="field.listType=='link'">
+                            <a :href="data.item" target="_blank">Link</a>
+                          </strong>
 
-                            <!-- Default just text -->
-                            <strong v-else>{{ data.item }}</strong>&nbsp;
-                          </v-chip>
-                        </template>
-                      </v-combobox>
-                    </template>
-
-                    <!-- Date -->
-                    <v-menu v-if="field.type=='date'" v-model="fieldStates[field.name]" :close-on-content-click="false" lazy transition="scale-transition" full-width min-width="290px">
-                      <!-- TODO :nudge-right="40" offset-y -->
-                      <template v-slot:activator="{ props }">
-                        <v-text-field v-model="item[field.name]" :label="field.displayName" v-bind="props"></v-text-field>
+                          <!-- Default just text -->
+                          <strong v-else>{{ data.item }}</strong>&nbsp;
+                        </v-chip>
                       </template>
-                      <v-date-picker v-model="item[field.name]" @input="fieldStates[field.name] = false"></v-date-picker>
-                    </v-menu>
+                    </v-combobox>
+                  </template>
 
-                    <!-- Boolean -->
-                    <v-switch v-if="field.type=='boolean'" v-model="item[field.name]" :label="field.displayName" :color="field.color ? field.color :'white'" hide-details></v-switch>
-
-                    <!-- libraryStyleStatus -->
-                    <template v-if="field.type=='libraryStyleStatus'">
-                      <v-layout>
-                        <v-flex xs6>
-                          <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,true)" :disabled="getOrSetDefault(field,{}).status">Check In</v-btn>
-                        </v-flex>
-                        <v-flex xs6>
-                          <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,false)" :disabled="!getOrSetDefault(field,{}).status">Check Out</v-btn>
-                        </v-flex>
-                      </v-layout>
+                  <!-- Date -->
+                  <v-menu v-if="field.type=='date'" v-model="fieldStates[field.name]" :close-on-content-click="false" lazy transition="scale-transition" full-width min-width="290px">
+                    <!-- TODO :nudge-right="40" offset-y -->
+                    <template v-slot:activator="{ props }">
+                      <v-text-field v-model="item[field.name]" :label="field.displayName" v-bind="props"></v-text-field>
                     </template>
+                    <v-date-picker v-model="item[field.name]" @input="fieldStates[field.name] = false"></v-date-picker>
+                  </v-menu>
 
-                  </v-flex>
-                </v-layout>
-              </v-form>
-            </v-layout>
-          </v-container>
+                  <!-- Boolean -->
+                  <v-switch v-if="field.type=='boolean'" v-model="item[field.name]" :label="field.displayName" :color="field.color ? field.color :'white'" hide-details></v-switch>
+
+                  <!-- libraryStyleStatus -->
+                  <template v-if="field.type=='libraryStyleStatus'">
+                    <v-row>
+                      <v-col cols="6">
+                        <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,true)" :disabled="getOrSetDefault(field,{}).status">Check In</v-btn>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-btn variant="flat" block :color="field.color ? field.color :'primary'" @click.stop="toggleLibraryStyleStatus(field,false)" :disabled="!getOrSetDefault(field,{}).status">Check Out</v-btn>
+                      </v-col>
+                    </v-row>
+                  </template>
+
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
         </v-card-actions>
 
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 
   <v-dialog v-model="tempState.deleteConfirm" width="500">
     <v-card>
@@ -267,7 +265,7 @@ export default {
      */
     getOrSetDefault: function (field, defaultValue) {
       if (this.item[field.name] === undefined) {
-        this.$set(this.item, field.name, defaultValue)
+        this.item[field.name] = defaultValue
       } // create the object if it has not been crated yet.
 
       return this.item[field.name]
@@ -279,7 +277,7 @@ export default {
      */
     toggleLibraryStyleStatus: function (field, status) {
       if (!this.item[field.name]) {
-        this.$set(this.item, field.name, {})
+        this.item[field.name] = {}
       } // create the object if it has not been crated yet.
 
       // Get user if its available
@@ -291,13 +289,13 @@ export default {
       }
 
       if (status) { // checkIn
-        this.$set(this.item[field.name], 'checkInDate', new Date().toISOString())
-        this.$set(this.item[field.name], 'checkInBy', user)
+        this.item[field.name]['checkInDate'] = new Date().toISOString()
+        this.item[field.name]['checkInBy'] = user
       } else { // checkOut
-        this.$set(this.item[field.name], 'checkOutDate', new Date().toISOString())
-        this.$set(this.item[field.name], 'checkOutBy', user)
+        this.item[field.name]['checkOutDate'] = new Date().toISOString()
+        this.item[field.name]['checkOutBy'] = user
       }
-      this.$set(this.item[field.name], 'status', status)
+      this.item[field.name]['status'] = status
     }
   }
 }

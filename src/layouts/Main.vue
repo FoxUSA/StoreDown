@@ -1,9 +1,21 @@
 <template>
 <v-app>
+  <!-- Toolbar -->
+  <v-app-bar color="blue" dense   flat>
+    <v-app-bar-title v-ripple style="cursor: pointer; overflow: visible;">
+      <span class="text-h6" @click.stop="drawer = !drawer">StoreDown</span>
+    </v-app-bar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-text-field @keyup.enter="search" placeholder="Search items" single-line color="white" class="py-0 ml-2" v-model='searchString' hide-details />
+    <v-btn variant="text" @click.stop="search">
+      Search
+    </v-btn>
+  </v-app-bar>
+
   <!-- Left menu -->
   <v-navigation-drawer v-model="drawer" :width="150">
-
-    <!-- TODO fixed clipped app-->
     <!-- Discovery -->
     <v-list-subheader class="mt-3 text-grey-darken-1">
       Discovery
@@ -70,25 +82,9 @@
     </v-list>
 
     <v-list-subheader class="text-caption mt-3 text-grey-darken-2 fade-out-legal">
-      &#169; 2022 Jacob Liscom <br /> Version: {{version}}
+      &#169; 2025 Jacob Liscom <br /> Version: {{version}}
     </v-list-subheader>
   </v-navigation-drawer>
-
-  <!-- Toolbar -->
-  <v-toolbar color="blue" dense fixed clipped-left app flat>
-    <v-toolbar-title v-ripple style="cursor: pointer; overflow: visible;">
-      <span class="text-h6" @click.stop="drawer = !drawer">StoreDown</span>
-    </v-toolbar-title>
-
-    <v-spacer></v-spacer>
-
-    <v-text-field @keyup.enter="search" placeholder="Search items" single-line color="white" class="py-0 ml-2" v-model='searchString' hide-details />
-    <v-toolbar-items >
-      <v-btn variant="flat" @click.stop="search" style="min-width:0">
-        Search
-      </v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
 
   <!-- Main content -->
   <v-main>
@@ -142,7 +138,7 @@ export default {
 
 <style>
 /* Fade everything */
-.application * {  /* Just on application prevents blinkPrevent a white blink 2/2*/
+.v-application * {  /* Just on application prevent a white blink 2/2*/
   animation: fadein .5s;
 }
 

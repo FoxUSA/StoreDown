@@ -1,7 +1,7 @@
 <template>
 <v-container grid-list-lg fluid>
-  <v-layout>
-    <v-flex xs12>
+  <v-row>
+    <v-col cols="12">
       <h4 v-if="!$route.query.prefix" class="text-h4">Item tree</h4>
       <h5 v-else class="text-h5">
         <button @click="breadcrumbsClick(-1)">Item tree</button>
@@ -10,8 +10,8 @@
           /
       </h5>
 
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
   <!-- TODO QR code generator -->
   <List :headers="headers" :loadData="loadData" :rowClick="rowClick" />
 </v-container>
@@ -98,8 +98,8 @@ export default {
             if (!item.showInTree) { return }
 
             this.headers.push({
-              text: item.displayName,
-              value: item.name,
+              title: item.displayName,
+              key: item.name,
               align: 'left',
               item: item, // So you can access all the parameters. Above are given in the data table support format.
               sortable: false
@@ -115,11 +115,9 @@ export default {
 
     /**
       * Load, cache, and return prefix data to List component
-      * @param  {Number} [skip=0]    - start seek. Number of items to skip
-      * @param  {Number} [limit=100] - Number of items to pull
       * @return {Promise}            - When resolved, return database data
       */
-    loadData: function (skip = 0, limit = 100) {
+    loadData: function (skip = 0, limit = 100) { // TODO REMOVE limits
       this.prefix = (this.$route.query.prefix || '').slice(0, -1).toLowerCase().split('/')
 
       /**

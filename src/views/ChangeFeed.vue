@@ -1,12 +1,12 @@
 <template>
 <v-container grid-list-lg fluid>
-  <v-layout>
-    <v-flex xs6>
+  <v-row>
+    <v-col cols="6">
       <h4 class="text-h4">Change feed</h4>
-    </v-flex>
-  </v-layout>
-  <v-layout>
-    <v-flex xs12>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col cols="12">
       <v-data-table :headers="headers" hide-actions :items="items" :loading="true">
         <template v-slot:items="props">
           <ListColumnTypes :props="props" :headers="headers" :rowClick="rowClick"/>
@@ -17,8 +17,8 @@
           </v-alert>
         </template>
       </v-data-table>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </v-container>
 </template>
 
@@ -59,8 +59,8 @@ export default {
             if (item.hideInList) { return }
 
             this.headers.push({
-              text: item.displayName,
-              value: item.name,
+              title: item.displayName,
+              key: item.name,
               align: 'left',
               item: item, // So you can access all the parameters. Above are given in the data table support format.
               sortable: false
