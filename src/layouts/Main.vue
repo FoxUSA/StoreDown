@@ -16,11 +16,12 @@
 
   <!-- Left menu -->
   <v-navigation-drawer v-model="drawer" :width="150">
-    <!-- Discovery -->
-    <v-list-subheader class="mt-3 text-grey-darken-1">
-      Discovery
-    </v-list-subheader>
     <v-list density="compact">
+      <!-- Discovery -->
+      <v-list-subheader class="text-grey-darken-1">
+        Discovery
+      </v-list-subheader>
+
       <v-list-item to="/search/">
         <v-list-item-title>
           Search
@@ -46,10 +47,11 @@
       </v-list-item>
     </v-list>
 
-    <v-list-subheader class="mt-3 text-grey-darken-1">
-      Modification
-    </v-list-subheader>
     <v-list density="compact">
+      <v-list-subheader class="text-grey-darken-1">
+        Modification
+      </v-list-subheader>
+
       <v-list-item to="/entry/">
         <v-list-item-title>
           New item
@@ -57,11 +59,11 @@
       </v-list-item>
     </v-list>
 
-    <!-- Settings -->
-    <v-list-subheader class="mt-3 text-grey-darken-1">
-      Settings
-    </v-list-subheader>
     <v-list density="compact">
+      <!-- Settings -->
+      <v-list-subheader class="text-grey-darken-1">
+        Settings
+      </v-list-subheader>
       <v-list-item to="/config">
         <v-list-item-title class="text-grey-darken-1">
           Configuration
@@ -81,7 +83,7 @@
       </v-list-item>
     </v-list>
 
-    <v-list-subheader class="text-caption mt-3 text-grey-darken-2 fade-out-legal">
+    <v-list-subheader class="text-caption text-grey-darken-2 fade-out-legal">
       &#169; 2025 Jacob Liscom <br /> Version: {{version}}
     </v-list-subheader>
   </v-navigation-drawer>

@@ -2,9 +2,9 @@
 <v-row>
   <v-col cols="12">
     <v-data-table-virtual :headers="headers" :items="data.rows" :loading="loading" :total-items="data.total_rows" :rows-per-page-items="[10,50,100,1000]">
-      <template v-slot:items="props">
+      <!-- <template v-slot:items="props">
         <ListColumnTypes :props="props" :headers="headers" :rowClick="rowClick" />
-      </template>
+      </template> -->
 
       <template v-slot:no-data>
         <v-alert :value="!loading" color="error">
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import ListColumnTypes from '../components/ListColumnTypes'
+// import ListColumnTypes from '../components/ListColumnTypes'
 
 export default {
-  components: {
-    ListColumnTypes
-  },
+  // components: {
+  //   ListColumnTypes
+  // },
   props: { // Example usage <List :headers="headers" :loadData="loadData" :rowClick="rowClick" />
     headers: Array,
     rowClick: Function,

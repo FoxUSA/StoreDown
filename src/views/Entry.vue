@@ -29,8 +29,7 @@
         </v-card-title>
 
         <v-card-actions>
-          <v-form cols="12">
-            <v-container>
+            <v-container fluid>
               <v-row>
                 <v-col :class="field.size ? `v-col-${field.size}` : 'v-col-12 v-col-sm-6 v-col-xl-4'" v-for="field in group.fields" :key="field.name">
 
@@ -63,13 +62,7 @@
                   </template>
 
                   <!-- Date -->
-                  <v-menu v-if="field.type=='date'" v-model="fieldStates[field.name]" :close-on-content-click="false" lazy transition="scale-transition" full-width min-width="290px">
-                    <!-- TODO :nudge-right="40" offset-y -->
-                    <template v-slot:activator="{ props }">
-                      <v-text-field v-model="item[field.name]" :label="field.displayName" v-bind="props"></v-text-field>
-                    </template>
-                    <v-date-picker v-model="item[field.name]" @input="fieldStates[field.name] = false"></v-date-picker>
-                  </v-menu>
+                  <v-text-field v-if="field.type=='date'" v-model="item[field.name]" :label="field.displayName" v-bind="props" type="date"></v-text-field>
 
                   <!-- Boolean -->
                   <v-switch v-if="field.type=='boolean'" v-model="item[field.name]" :label="field.displayName" :color="field.color ? field.color :'white'" hide-details></v-switch>
@@ -89,7 +82,6 @@
                 </v-col>
               </v-row>
             </v-container>
-          </v-form>
         </v-card-actions>
 
       </v-card>
